@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Janjan F. Dayta | IT & Data Management Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght=300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    :root {
+      --bg-dark: #090d16;
+      --card-bg: #111726;
+      --border-color: #1e293b;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #a78bfa; 
+      --accent-gradient: linear-gradient(135deg, #a78bfa, #6366f1);
+      --success: #22c55e;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      padding: 20px;
+      line-height: 1.6;
+      position: relative;
+    }
+
+    .portfolio-wrapper {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      padding-bottom: 60px;
+    }
+
+    /* PROFILE HEADER CARD */
+    .profile-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .profile-left {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .profile-img {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--accent);
+    }
+
+    .profile-info h1 {
+      font-size: 26px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .verified-badge {
+      color: var(--accent);
+      font-size: 18px;
+    }
+
+    .profile-location {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .profile-tagline {
+      font-size: 15px;
+      color: var(--accent);
+      font-weight: 500;
+      margin-top: 5px;
+    }
+
+    .profile-actions {
+      display: flex;
+      gap: 12px;
+    }
+
+    .btn {
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 14px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-primary {
+      background: var(--text-main);
+      color: var(--bg-dark);
+      border: none;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent);
+      color: var(--text-main);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text-main);
+      border: 1px solid var(--border-color);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.05);
+    }
+
+    /* DASHBOARD GRID SYSTEM */
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 20px;
+    }
+
+    @media (max-width: 992px) {
+      .dashboard-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .column {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 24px;
+    }
+
+    .card-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text-main);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      padding-bottom: 10px;
+    }
+
+    .card-title i {
+      color: var(--accent);
+    }
+
+    .about-text {
+      color: var(--text-muted);
+      font-size: 14.5px;
+      line-height: 1.7;
+    }
+
+    .about-text p {
+      margin-bottom: 14px;
+    }
+
+    /* SERVICES GRID */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .service-chip {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-color);
+      padding: 12px;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text-main);
+    }
+
+    .service-chip i {
+      color: var(--accent);
+    }
+
+    /* PROJECTS SUB-GRID */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    @media (max-width: 576px) {
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .project-item {
+      background: rgba(255,255,255,0.01);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .project-name {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .project-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin: 8px 0 14px 0;
+      min-height: 40px;
+    }
+
+    .project-link {
+      font-size: 12px;
+      color: var(--accent);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* TIMELINE STYLES */
+    .timeline {
+      position: relative;
+      padding-left: 20px;
+      border-left: 2px solid var(--border-color);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 24px;
+    }
+
+    .timeline-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: -27px;
+      top: 4px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--card-bg);
+      border: 2px solid var(--accent);
+    }
+
+    .timeline-date {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+
+    .timeline-role {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .timeline-org {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .timeline-details {
+      margin-top: 6px;
+      font-size: 13px;
+      color: var(--text-muted);
+      padding-left: 16px;
+    }
+
+    .timeline-details li {
+      margin-bottom: 4px;
+    }
+
+/* Styling para sa zoom effect */
+.gallery-img-container {
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.gallery-img-container:active {
+  transform: scale(1.1); /* Mag-e-expand nang bahagya kapag kinlik */
+  border-color: var(--accent);
+}
+
+    /* HORIZONTAL GALLERY TRACK */
+    .gallery-container {
+      width: 100%;
+      overflow-x: auto;
+      display: flex;
+      gap: 15px;
+      padding-bottom: 10px;
+      scroll-behavior: smooth;
+    }
+
+    .gallery-container::-webkit-scrollbar {
+      height: 6px;
+    }
+    .gallery-container::-webkit-scrollbar-thumb {
+      background: var(--border-color);
+      border-radius: 4px;
+    }
+
+    .gallery-item {
+      min-width: 240px;
+      max-width: 240px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 12px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .gallery-img-container {
+      width: 100%;
+      height: 140px;
+      background: rgba(255,255,255,0.01);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 10px;
+      overflow: hidden;
+    }
+
+    .gallery-img-container img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+
+    .gallery-img-placeholder {
+      width: 100%;
+      height: 140px;
+      background: linear-gradient(135deg, rgba(30,41,59,0.4), rgba(15,23,42,0.7));
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    .gallery-item p {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-main);
+      margin-top: 4px;
+    }
+
+    .gallery-item span {
+      font-size: 11px;
+      color: var(--text-muted);
+      display: block;
+      margin-top: 2px;
+    }
+
+    /* FLOATING CHAT BOX ICON & INTERFACE */
+    .floating-chat-trigger {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      width: 60px;
+      height: 60px;
+      background: var(--accent-gradient);
+      color: #090d16;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      box-shadow: 0 8px 32px rgba(167, 139, 250, 0.3);
+      cursor: pointer;
+      z-index: 9999;
+      transition: transform 0.2s ease;
+    }
+
+    .floating-chat-trigger:hover {
+      transform: scale(1.08);
+    }
+
+    .chat-window-panel {
+      position: fixed;
+      bottom: 95px;
+      right: 25px;
+      width: 360px;
+      max-width: calc(100vw - 50px);
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+      z-index: 10000;
+      display: none; 
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .chat-panel-header {
+      background: #182032;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .chat-panel-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .chat-panel-title span {
+      width: 8px;
+      height: 8px;
+      background: var(--success);
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .chat-close-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .chat-close-btn:hover {
+      color: var(--text-main);
+    }
+
+    .chat-box-display {
+      background: #060911;
+      height: 240px;
+      overflow-y: auto;
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .chat-msg {
+      max-width: 85%;
+      padding: 8px 12px;
+      border-radius: 10px;
+      font-size: 13px;
+      word-wrap: break-word;
+    }
+
+    .chat-msg.bot {
+      background: #1e293b;
+      color: var(--text-main);
+      align-self: flex-start;
+      border-bottom-left-radius: 2px;
+    }
+
+    .chat-msg.user {
+      background: var(--accent);
+      color: #090d16;
+      align-self: flex-end;
+      font-weight: 500;
+      border-bottom-right-radius: 2px;
+    }
+
+    .chat-input-row {
+      display: flex;
+      gap: 8px;
+      padding: 12px;
+      background: #0d1321;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .chat-box-input {
+      flex: 1;
+      background: #060911;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 8px 12px;
+      color: var(--text-main);
+      font-size: 13px;
+      outline: none;
+    }
+
+    .chat-box-input:focus {
+      border-color: var(--accent);
+    }
+
+    .chat-send-btn {
+      background: var(--accent);
+      color: #090d16;
+      border: none;
+      border-radius: 8px;
+      padding: 0 14px;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 13px;
+    }
+
+    .suggested-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      padding: 0 12px 12px 12px;
+      background: #0d1321;
+    }
+
+    .suggest-chip {
+      font-size: 11px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border-color);
+      padding: 4px 8px;
+      border-radius: 6px;
+      cursor: pointer;
+      color: var(--text-muted);
+    }
+
+    .suggest-chip:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+  </style>
+
+  <script>
+    function fixExtensionOrFallback(imgElement) {
+      if (imgElement.src.endsWith('.png')) {
+        imgElement.src = imgElement.src.replace('.png', '.jpg');
+      } else if (imgElement.src.endsWith('.jpg')) {
+        imgElement.src = imgElement.src.replace('.jpg', '.jpeg');
+      } else {
+        const parentContainer = imgElement.parentElement;
+        if (parentContainer) {
+          parentContainer.className = "gallery-img-placeholder";
+          parentContainer.innerHTML = `<i class="fas fa-award" style="color: var(--accent);"></i>`;
+        }
+      }
+    }
+  </script>
+</head>
+<body>
+
+<div class="portfolio-wrapper">
+
+  <header class="profile-card">
+    <div class="profile-left">
+      <img src="profile.jpg" alt="Janjan F. Dayta" class="profile-img" onerror="this.src='https://via.placeholder.com/150'">
+      <div class="profile-info">
+        <h1>Janjan F. Dayta <i class="fas fa-check-circle verified-badge" title="Verified Portfolio"></i></h1>
+        <div class="profile-location"><i class="fas fa-map-marker-alt"></i> Bulusan, Sorsogon</div>
+        <div class="profile-tagline">Information Technology Graduate | Systems & Data Specialist</div>
+      </div>
+    </div>
+    <div class="profile-actions">
+      <a href="mailto:janjandayta300@gmail.com?subject=Portfolio%20Inquiry&body=Hi,%20I%20saw%20your%20portfolio%20and%20I%20would%20like%20to%20connect." 
+   class="btn btn-primary">
+   <i class="fas fa-envelope"></i> Email Me
+</a>
+
+<style>
+  .btn {
+    padding: 12px 24px;
+    border-radius: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+  }
+
+  .btn-primary {
+    background: #a78bfa; /* Matches your accent color */
+    color: #090d16;
+  }
+
+  .btn-primary:hover {
+    background: #8b5cf6; /* Slightly darker shade */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(167, 139, 250, 0.4);
+    color: white;
+  }
+</style>
+      <a href="tel:+639594887592" class="btn btn-secondary"><i class="fas fa-phone"></i> (63) 9**-**8-**92</a>
+    </div>
+  </header>
+
+  <main class="dashboard-grid">
+    
+    <div class="column">
+      
+      <section class="card">
+        <h2 class="card-title"><i class="fas fa-user"></i> Profile Overview</h2>
+        <div class="about-text">
+          <p>I am a Bachelor of Science in Information Technology graduate seeking an entry-level role in IT Support, Helpdesk, or Accounting/Admin infrastructure environments. I bring documented experience in systematic data management, corporate document processing, and hardware/software systems troubleshooting.</p>
+          <p>With strong technical proficiency in Microsoft Office configurations and an exceptional eye for detail, I focus on streamlining system operational workflows and maintaining accurate records to help support team productivity.</p>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2 class="card-title"><i class="fas fa-handholding-heart"></i> Core Professional Services</h2>
+        <div class="services-grid">
+          <div class="service-chip"><i class="fab fa-html5"></i> Frontend Web Dev (HTML/CSS)</div>
+          <div class="service-chip"><i class="fas fa-file-alt"></i> Document Processing</div>
+          <div class="service-chip"><i class="fas fa-folder-open"></i> File & Record Organization</div>
+          <div class="service-chip"><i class="fas fa-align-left"></i> Report & Document Formatting</div>
+          <div class="service-chip"><i class="fas fa-keyboard"></i> Data Entry</div>
+          <div class="service-chip"><i class="fas fa-desktop"></i> Computer Literacy</div>
+          <div class="service-chip"><i class="fas fa-table"></i> Excel Data Management</div>
+          <div class="service-chip"><i class="fas fa-paint-brush"></i> Canva Layout Creation</div>
+          <div class="service-chip"><i class="fas fa-envelope-open-text"></i> Email Management</div>
+          <div class="service-chip"><i class="fas fa-user-cog"></i> Administrative Support</div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2 class="card-title"><i class="fas fa-project-diagram"></i> Systems Development</h2>
+        <div class="projects-grid">
+          
+          <div class="project-item" style="grid-column: span 2;">
+            <div>
+              <div class="project-name"><i class="fas fa-utensils"></i> Restaurant Management Application with AI-Based Recommendation</div>
+              <div class="project-desc"><b>Target Client: Kitchen One Bulan.</b> A comprehensive system finalized to digitize ordering operations, live stock adjustments, and order delivery updates. Integrated a logic rule engine predicting food preferences using historical transactions.</div>
+            </div>
+            <span class="project-link">Technical Writer / Project Documentation Specialist <i class="fas fa-check"></i></span>
+          </div>
+
+          <div class="project-item" style="grid-column: span 2;">
+            <div>
+              <div class="project-name">DATAOSX Smart Code Breaker</div>
+              <div class="project-desc">An interactive deployment showcasing custom search evaluation logic parameters and state-tracking rules.</div>
+            </div>
+            <a href="https://decode-the-hidden-number.vercel.app" target="_blank" class="project-link">Live Game Deployment <i class="fas fa-external-link-alt"></i></a>
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+
+    <div class="column">
+      
+      <section class="card">
+        <h2 class="card-title"><i class="fas fa-briefcase"></i> Work Experience</h2>
+        <div class="timeline">
+          
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-date">January - April 2026</div>
+            <div class="timeline-role">On-the-Job Trainee (Accounting Department)</div>
+            <div class="timeline-org">Pitakamo IT Solutions And Marketing Corp.</div>
+            <ul class="timeline-details">
+              <li>Recorded and maintained CRJ, GJ, and CDJ transactions with high precision.</li>
+              <li>Encoded and verified critical financial data sheets (OR numbers, payees, amounts).</li>
+              <li>Managed and organized high-volume digital records using Google Drive ecosystems.</li>
+              <li>Reviewed structural data discrepancies to ensure transaction accuracy.</li>
+              <li>Assisted in inventory checking procedures and management reporting.</li>
+            </ul>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-date">2025 - 2026</div>
+            <div class="timeline-role">Technical Writer</div>
+            <div class="timeline-org">Kitchen One Bulan Capstone Systems Project</div>
+            <ul class="timeline-details">
+              <li>Assisted in defining strict operational requirements and objective charts.</li>
+              <li>Participated heavily in technical documentation drafting, systems writing, and testing.</li>
+              <li>Collaborated with design teams to map workflows and application logic paths.</li>
+            </ul>
+          </div>
+
+        </div>
+      </section>
+
+      <section class="card">
+        <h2 class="card-title"><i class="fas fa-graduation-cap"></i> Education</h2>
+        <div class="timeline">
+          
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-date">2022 - 2026</div>
+            <div class="timeline-role">Bachelor of Science in Information Technology</div>
+            <div class="timeline-org">Sorsogon State University - Bulan Campus</div>
+            <ul class="timeline-details">
+              <li>Graduated: June 2026</li>
+              <li>Dean's Lister - 1st Semester, A.Y. 2025-2026</li>
+              <li>Dean's Lister - 1st Semester, A.Y. 2024-2025</li>
+              <li>Dean's Lister - 2nd Semester, A.Y. 2023-2024</li>
+            </ul>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-date">2016 - 2022</div>
+            <div class="timeline-role">High School Graduate</div>
+            <div class="timeline-org">San Roque National High School</div>
+          </div>
+
+        </div>
+      </section>
+
+      <section class="card">
+        <h2 class="card-title"><i class="fas fa-file-invoice"></i> Completed Certifications</h2>
+        <div class="timeline" style="border-left: 1px dashed var(--border-color)">
+          
+          <div class="timeline-item">
+            <div class="timeline-dot" style="border-color: var(--success)"></div>
+            <div class="timeline-role">OJT Completion Certificate</div>
+            <div class="timeline-org">Pitakamo IT Solutions • 486 Hours Completed</div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-dot" style="border-color: var(--success)"></div>
+            <div class="timeline-role">Capstone Project Completion Certificate</div>
+            <div class="timeline-org">Sorsogon State University • System Development Track</div>
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <section class="card">
+    <h2 class="card-title"><i class="fas fa-certificate"></i> Verified Certificate Gallery (Scroll Track)</h2>
+    <div class="gallery-container">
+      
+      <div class="gallery-item">
+        <div class="gallery-img-container">
+          <img src="cert-excel.png" alt="Work Smarter in Excel" onerror="fixExtensionOrFallback(this)">
+        </div>
+        <div>
+          <p>Work Smarter in Excel</p>
+          <span>Microsoft Partner Credential</span>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <div class="gallery-img-container">
+          <img src="cert-ojt.jpg" alt="OJT Completion Certificate" onerror="fixExtensionOrFallback(this)">
+        </div>
+        <div>
+          <p>OJT Completion Certificate</p>
+          <span>Pitakamo IT Solutions</span>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <div class="gallery-img-container">
+          <img src="cert-capstone.jpg" alt="Capstone Development Title" onerror="fixExtensionOrFallback(this)">
+        </div>
+        <div>
+          <p>Capstone Development Title</p>
+          <span>Sorsogon State University</span>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <div class="gallery-img-container">
+          <img src="cert-deans-1.jpg" alt="1st Semester, A.Y. 2025-2026" onerror="fixExtensionOrFallback(this)">
+        </div>
+        <div>
+          <p>1st Semester, A.Y. 2025-2026</p>
+          <span>SorSU Bulan Campus</span>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <div class="gallery-img-container">
+          <img src="cert-deans-2.jpg" alt="1st Semester, A.Y. 2024-2025" onerror="fixExtensionOrFallback(this)">
+        </div>
+        <div>
+          <p>1st Semester, A.Y. 2024-2025</p>
+          <span>SorSU Bulan Campus</span>
+        </div>
+      </div>
+
+      <div class="gallery-item">
+        <div class="gallery-img-container">
+          <img src="cert-deans-3.jpg" alt="2nd Semester, A.Y. 2023-2024" onerror="fixExtensionOrFallback(this)">
+        </div>
+        <div>
+          <p>2nd Semester, A.Y. 2023-2024</p>
+          <span>SorSU Bulan Campus</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</div>
+
+<div class="floating-chat-trigger" id="chatTrigger" onclick="toggleChatWindow()">
+  <i class="fas fa-comments"></i>
+</div>
+
+<div class="chat-window-panel" id="chatPanel">
+  <div class="chat-panel-header">
+    <div class="chat-panel-title"><span></span> Talk to Janjan</div>
+    <button class="chat-close-btn" onclick="toggleChatWindow()"><i class="fas fa-times"></i></button>
+  </div>
+  
+  <div class="chat-box-display" id="chatDisplay">
+    <div class="chat-msg bot">Hello! Welcome to my portfolio assistance channel. Ask me any structural career question about my profile datasets!</div>
+  </div>
+  
+  <div class="chat-input-row">
+    <input type="text" id="chatInput" class="chat-box-input" placeholder="Type a question...">
+    <button class="chat-send-btn" onclick="sendChatMessage()">Send</button>
+  </div>
+
+  <div class="suggested-tags">
+    <span class="suggest-chip" onclick="quickFillChat('Tell me about your OJT')">💼 OJT History</span>
+    <span class="suggest-chip" onclick="quickFillChat('What are your skills?')">🛠️ Skills</span>
+    <span class="suggest-chip" onclick="quickFillChat('Explain your Capstone project')">🎮 Capstone Details</span>
+  </div>
+</div>
+
+<script>
+  // Smooth Automatic Scroll Loop Config for Certificates Gallery
+  const gallery = document.querySelector('.gallery-container');
+  let scrollSpeed = 1; 
+  let scrollDirection = 1; 
+
+  function autoScrollGallery() {
+    if (!gallery) return;
+    gallery.scrollLeft += scrollSpeed * scrollDirection;
+    if (gallery.scrollLeft >= (gallery.scrollWidth - gallery.clientWidth) - 1) {
+      scrollDirection = -1; 
+    } else if (gallery.scrollLeft <= 0) {
+      scrollDirection = 1;  
+    }
+  }
+
+  let scrollInterval = setInterval(autoScrollGallery, 30);
+
+  gallery.addEventListener('mouseenter', () => clearInterval(scrollInterval));
+  gallery.addEventListener('mouseleave', () => scrollInterval = setInterval(autoScrollGallery, 30));
+  gallery.addEventListener('touchstart', () => clearInterval(scrollInterval));
+  gallery.addEventListener('touchend', () => scrollInterval = setInterval(autoScrollGallery, 30));
+
+  // Chat engine configuration and interactive responses
+  const chatPanel = document.getElementById('chatPanel');
+  const chatDisplay = document.getElementById('chatDisplay');
+  const chatInput = document.getElementById('chatInput');
+
+  function toggleChatWindow() {
+    if (chatPanel.style.display === 'flex') {
+      chatPanel.style.display = 'none';
+    } else {
+      chatPanel.style.display = 'flex';
+      chatDisplay.scrollTop = chatDisplay.scrollHeight;
+    }
+  }
+
+  chatInput.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') {
+      sendChatMessage();
+    }
+  });
+
+  function quickFillChat(text) {
+    chatInput.value = text;
+    sendChatMessage();
+  }
+
+  function sendChatMessage() {
+    const rawText = chatInput.value.trim();
+    if (!rawText) return;
+
+    appendBubble(rawText, 'user');
+    chatInput.value = '';
+
+    // Typing Animation
+    const typingId = 'typing-dots';
+    appendBubble('<span id="'+typingId+'">...</span>', 'bot');
+    
+    setTimeout(() => {
+      document.getElementById(typingId).parentElement.remove();
+      const lowerText = rawText.toLowerCase();
+      let reply = "That's interesting! Janjan focuses on systems efficiency. Would you like to know about his <b>Capstone project</b> or his <b>OJT experience</b>?";
+
+      if (lowerText.includes('ojt') || lowerText.includes('experience') || lowerText.includes('pitakamo')) {
+        reply = "During his 486-hour internship at <b>Pitakamo IT Solutions</b>, Janjan handled corporate accounting journals and high-volume data management, bridging IT processes with financial workflows.";
+      } else if (lowerText.includes('skill') || lowerText.includes('service') || lowerText.includes('canva')) {
+        reply = "Janjan is highly skilled in <b>Excel Data Management, Technical Documentation, HTML/CSS Web Development, and Administrative Support</b>. He also uses Canva to create professional visual assets.";
+      } else if (lowerText.includes('capstone') || lowerText.includes('project') || lowerText.includes('bulan')) {
+        reply = "His capstone project was the <b>Restaurant Management Application for Kitchen One Bulan</b>, which features AI-based food recommendations and real-time inventory management.";
+      } else if (lowerText.includes('hi') || lowerText.includes('hello')) {
+        reply = "Hi! I'm Janjan's AI Assistant. Ask me anything about his technical skills, projects, or his professional background!";
+      }
+
+      appendBubble(reply, 'bot');
+    }, 1200); // 1.2s delay for "thinking" feel
+  }
+
+  function appendBubble(text, sender) {
+    const div = document.createElement('div');
+    div.className = `chat-msg ${sender}`;
+    div.innerHTML = text;
+    chatDisplay.appendChild(div);
+    chatDisplay.scrollTop = chatDisplay.scrollHeight;
+  }
+</script>
+
+</body>
+</html>
